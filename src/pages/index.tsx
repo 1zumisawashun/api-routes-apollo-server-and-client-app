@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import Link from "next/link";
 import { useQuery } from "@apollo/client";
-import { initializeApollo } from "../apollo/client";
+import { initializeApollo } from "../../apollo/client";
 
 const ViewerQuery = gql`
   query ViewerQuery {
@@ -13,7 +13,7 @@ const ViewerQuery = gql`
   }
 `;
 
-const Index = () => {
+export default function Pages() {
   const {
     data: { viewer },
   } = useQuery(ViewerQuery);
@@ -24,7 +24,7 @@ const Index = () => {
       <Link href="/about">static</Link> page.
     </div>
   );
-};
+}
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
@@ -39,5 +39,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-export default Index;

@@ -1,0 +1,25 @@
+#import Cart, AddToCartInput, RemoveFromCartInput, IncreaseCartItemInput, DecreaseCartItemInput from "prisma.cart.graphql"
+#import jsonplaceholderPost from "json-placeholder.post.graphql"
+#import jsonplaceholderUser from "json-placeholder.user.graphql"
+#import Playlist, AddItemsToPlaylistInput, AddItemsToPlaylistPayload from "spotify.graphql"
+
+type Query {
+  hello: String
+  cart(id: ID!): Cart
+  featuredPlaylists: [Playlist!]!
+  playlist(id: ID!): Playlist
+  jsonplaceholderUser(id: ID!): jsonplaceholderUser
+  jsonplaceholderUsers: [jsonplaceholderUser]
+  jsonplaceholderPost(id: ID!): jsonplaceholderPost
+  jsonplaceholderPosts: [jsonplaceholderPost]
+}
+
+type Mutation {
+  addItem(input: AddToCartInput!): Cart
+  removeItem(input: RemoveFromCartInput!): Cart
+  increaseCartItem(input: IncreaseCartItemInput!): Cart
+  decreaseCartItem(input: DecreaseCartItemInput!): Cart
+  addItemsToPlaylist(
+    input: AddItemsToPlaylistInput!
+  ): AddItemsToPlaylistPayload!
+}

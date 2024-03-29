@@ -3,23 +3,48 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "prisma db seed",
+    "prisma:dev": "run-s -l prisma:generate prisma:migrate prisma:seed",
+    "prisma:format": "npx prisma format",
+    "prisma:studio": "npx prisma studio",
+    "prisma:push": "npx prisma db push",
+    "prisma:reset": "npx prisma db push --force-reset && npm run prisma:seed",
+    "graphql:generate": "graphql-codegen --watch \"src/schema.graphql\""
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
+    "@apollo/datasource-rest": "^6.2.2",
     "@apollo/server": "^4.1.1",
     "@as-integrations/next": "^1.1.0",
     "@graphql-tools/schema": "^9.0.9",
+    "@prisma/client": "^5.11.0",
     "deepmerge": "4.2.2",
     "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-resolvers": "^4.0.6",
     "@types/node": "^18.0.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "concurrently": "^8.2.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^4.7.4"
+  },
+  "volta": {
+    "node": "18.17.0"
+  },
+  "prisma": {
+    "seed": "ts-node -r tsconfig-paths/register --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
