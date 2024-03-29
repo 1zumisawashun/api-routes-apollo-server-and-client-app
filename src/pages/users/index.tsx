@@ -23,10 +23,10 @@ export default function Pages() {
     <div>
       {data.viewers.map((user) => {
         return (
-          <>
+          <p>
             You're signed in as {user.name} and you're {user.status} goto
             <Link href={`/user/${user.id}`}>static</Link> page.
-          </>
+          </p>
         );
       })}
     </div>

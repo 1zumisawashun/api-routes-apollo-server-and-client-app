@@ -3,39 +3,38 @@ import Link from "next/link";
 import { useQuery } from "@apollo/client";
 import { initializeApollo } from "../../apollo/client";
 
-const ViewerQuery = gql`
-  query ViewerQuery {
-    viewer {
-      id
-      name
-      status
-    }
+const HelloQuery = gql`
+  query HelloQuery {
+    hello
   }
 `;
 
 export default function Pages() {
-  const {
-    data: { viewer },
-  } = useQuery(ViewerQuery);
+  const { data, loading, error } = useQuery(HelloQuery);
+
+  if (loading) return <p>ローディング中です</p>;
+  if (error) return <p>エラーが発生しています</p>;
 
   return (
     <div>
-      You're signed in as {viewer.name} and you're {viewer.status} goto{" "}
-      <Link href="/about">static</Link> page.
+      <p>{data.hello} world!</p>
+      <Link href="/users">users</Link> page.
+      <Link href="/users/1">user</Link> page.
+      <Link href="/cart">cart</Link> page.
     </div>
   );
 }
 
-export async function getStaticProps() {
-  const apolloClient = initializeApollo();
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: ViewerQuery,
-  });
+//   await apolloClient.query({
+//     query: ViewerQuery,
+//   });
 
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  };
-}
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   };
+// }

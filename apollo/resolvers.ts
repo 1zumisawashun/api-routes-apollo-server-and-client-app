@@ -9,15 +9,16 @@ export const resolvers = {
     hello() {
       return "Hello World";
     },
-    async viewer(parent: undefined, args: { id: number }, { prisma }: Context) {
+    // FIXME:なぜかStringが渡ってくる
+    async viewer(parent: undefined, args: { id: string }, { prisma }: Context) {
+      console.log(args);
       const viewer = await prisma.user.findFirstOrThrow({
-        where: { id: args.id },
+        where: { id: +args.id },
       });
       return viewer;
     },
     async viewers(parent: undefined, args: {}, { prisma }: Context) {
       const viewers = await prisma.user.findMany();
-      console.log(viewers);
       return viewers;
     },
   },
