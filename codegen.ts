@@ -6,7 +6,6 @@ const config: CodegenConfig = {
   generates: {
     "./apollo/resolvers-types.ts": {
       config: {
-        // contextType: "./src/pages/api/index#GraphQLContext",
         mappers: {
           Cart: "@prisma/client#Cart",
           CartItem: "@prisma/client#CartItem",

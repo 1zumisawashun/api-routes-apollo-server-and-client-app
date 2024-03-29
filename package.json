@@ -12,7 +12,8 @@
     "prisma:studio": "npx prisma studio",
     "prisma:push": "npx prisma db push",
     "prisma:reset": "npx prisma db push --force-reset && npm run prisma:seed",
-    "graphql:generate": "graphql-codegen --watch \"src/schema.graphql\""
+    "graphql:generate": "graphql-codegen \"apollo/root.graphql\"",
+    "graphql:generate:watch": "graphql-codegen --watch \"apollo/root.graphql\""
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",

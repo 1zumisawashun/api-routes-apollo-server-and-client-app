@@ -11,26 +11,27 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  status  String   @default("active")
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  name   String?
+  status String  @default("active")
+  cart   Cart?
 }
 
 model Cart {
-  id    String     @id @default(uuid())
-  items CartItem[]
+  id     Int        @id @default(autoincrement())
+  items  CartItem[]
+  userId Int        @unique
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CartItem {
-  id          String  @default(uuid())
+  id          Int     @id @default(autoincrement())
   name        String
   description String?
   price       Int
   quantity    Int
   image       String?
-  cartId      String
-  cart        Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
-
-  @@id([id, cartId])
+  cartId      Int?     @unique
+  cart        Cart?    @relation(fields: [cartId], references: [id], onDelete: Cascade)
 }

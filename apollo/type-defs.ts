@@ -43,7 +43,7 @@ export const typeDefs = gql`
 // })
 
 /**
- * これで直接GraphQLのスキーマを定義することができる、確かにVSCodeのタグ補完が効くのは便利だな
+ * これで直接GraphQLのスキーマを定義することができる、確かにVSCodeのタグ補完が効くのは便利だな、つまりDocumentNodeでなくても問題ない
  * @see https://zenn.dev/dqn/articles/vercel-next-apollo
  */
 
@@ -57,33 +57,3 @@ export const typeDefs = gql`
 //     posts: [Post!]!
 //   }
 // `;
-
-
-/**
-   * The subscribe callback executed right after processing the request
-   * before proceeding with the GraphQL operation execution.
-   *
-   * If you return `ExecutionResult` from the callback, it will be used
-   * directly for responding to the request. Useful for implementing a response
-   * cache.
-   *
-   * If you return `ExecutionArgs` from the callback, it will be used instead of
-   * trying to build one internally. In this case, you are responsible for providing
-   * a ready set of arguments which will be directly plugged in the operation execution.
-   *
-   * You *must* validate the `ExecutionArgs` yourself if returning them.
-   *
-   * If you return an array of `GraphQLError` from the callback, they will be reported
-   * to the client while complying with the spec.
-   *
-   * Omitting the fields `contextValue` from the returned `ExecutionArgs` will use the
-   * provided `context` option, if available.
-   *
-   * Useful for preparing the execution arguments following a custom logic. A typical
-   * use-case is persisted queries. You can identify the query from the request parameters
-   * and supply the appropriate GraphQL operation execution arguments.
-   *
-   * If you want to respond to the client with a custom status and/or body,
-   * you should do by returning a `Request` argument which will stop
-   * further execution.
-   */

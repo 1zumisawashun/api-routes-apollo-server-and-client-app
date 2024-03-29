@@ -1,7 +1,9 @@
 import { SpotifyAPI } from "./datasources/spotify";
+import type { PrismaClient } from "@prisma/client";
 
-export type DataSourceContext = {
+export type Context = {
   dataSources: {
     spotifyAPI: SpotifyAPI;
   };
+  prisma: PrismaClient;
 };

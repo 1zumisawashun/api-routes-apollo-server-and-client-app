@@ -1,29 +1,24 @@
 import { PrismaClient } from "@prisma/client";
-import { faker } from "@faker-js/faker";
+import { cartItems } from "./cart";
+import { users } from "./user";
 
 const prisma = new PrismaClient();
-
-const users = [
-  {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    status: "active",
-  },
-  {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    status: "active",
-  },
-];
 
 async function main() {
   // delete all
   await prisma.user.deleteMany();
+  await prisma.cart.deleteMany();
+  await prisma.cartItem.deleteMany();
 
   // seeding
   for (const user of users) {
     await prisma.user.create({
       data: user,
+    });
+  }
+  for (const cartItem of cartItems) {
+    await prisma.cartItem.create({
+      data: cartItem,
     });
   }
 }
