@@ -11,16 +11,6 @@ const typeDefs = loadSchemaSync("apollo/root.graphql", {
   loaders: [new GraphQLFileLoader()],
 });
 
-// import { readFileSync } from "fs";
-// import path from "path";
-// import { gql } from "graphql-tag";
-
-// export const typeDefs = gql(
-//   readFileSync(path.resolve(__dirname, "apollo/root.graphql"), {
-//     encoding: "utf-8",
-//   })
-// );
-
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
