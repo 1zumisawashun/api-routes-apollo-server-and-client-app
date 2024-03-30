@@ -2,6 +2,8 @@
 #import IncreaseCartItemInput, DecreaseCartItemInput from "./schema/prisma.cart-item.graphql"
 #import User from "./schema/prisma.user.graphql"
 #import Playlist, AddItemsToPlaylistInput, AddItemsToPlaylistPayload from "./schema/spotify.graphql"
+#import jsonPlaceholderPost from "./schema/json-placeholder.post.graphql"
+#import jsonPlaceholderUser from "./schema/json-placeholder.user.graphql"
 
 type Query {
   hello: String
@@ -10,6 +12,10 @@ type Query {
   viewer(id: ID!): User
   featuredPlaylists: [Playlist!]!
   playlist(id: ID!): Playlist
+  jsonPlaceholderUser(id: ID!): jsonPlaceholderUser
+  jsonPlaceholderUsers: [jsonPlaceholderUser!]!
+  jsonPlaceholderPost(id: ID!): jsonPlaceholderPost
+  jsonPlaceholderPosts: [jsonPlaceholderPost!]!
 }
 
 type Mutation {

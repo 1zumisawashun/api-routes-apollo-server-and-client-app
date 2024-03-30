@@ -1,6 +1,6 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
 
-export class JsonplaceholderUserAPI extends RESTDataSource {
+export class JsonPlaceholderUserAPI extends RESTDataSource {
   override baseURL = "https://jsonplaceholder.typicode.com/";
 
   async getUsers() {

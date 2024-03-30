@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
-import { initializeApollo } from "../../../apollo/client";
 
 const ViewersQuery = gql`
   query ViewersQuery {
@@ -32,17 +31,3 @@ export default function Pages() {
     </div>
   );
 }
-
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo();
-
-//   await apolloClient.query({
-//     query: ViewerQuery,
-//   });
-
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   };
-// }

@@ -22,7 +22,7 @@ let apolloClient;
 //   }
 // }
 
-function createApolloClient() {
+export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     // link: createIsomorphLink(),
@@ -57,3 +57,30 @@ export function useApollo(initialState) {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
 }
+
+export function client() {
+  return new ApolloClient({
+    uri: "/api/graphql",
+    cache: new InMemoryCache(),
+  });
+}
+
+// use in _app.tsx ====================================
+
+// const apolloClient = useApollo(pageProps.initialApolloState);
+
+// use in pages ====================================
+
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo();
+
+//   await apolloClient.query({
+//     query: ViewerQuery,
+//   });
+
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   };
+// }

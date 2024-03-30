@@ -48,6 +48,15 @@ export type AddToCartInput = {
   quantity?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Address = {
+  __typename?: 'Address';
+  city?: Maybe<Scalars['String']['output']>;
+  geo?: Maybe<Geo>;
+  street?: Maybe<Scalars['String']['output']>;
+  suite?: Maybe<Scalars['String']['output']>;
+  zipcode?: Maybe<Scalars['String']['output']>;
+};
+
 export type Cart = {
   __typename?: 'Cart';
   id: Scalars['ID']['output'];
@@ -64,9 +73,22 @@ export type CartItem = {
   quantity: Scalars['Int']['output'];
 };
 
+export type Company = {
+  __typename?: 'Company';
+  bs?: Maybe<Scalars['String']['output']>;
+  catchPhrase?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 export type DecreaseCartItemInput = {
   cartId: Scalars['ID']['input'];
   id: Scalars['ID']['input'];
+};
+
+export type Geo = {
+  __typename?: 'Geo';
+  lat?: Maybe<Scalars['String']['output']>;
+  lng?: Maybe<Scalars['String']['output']>;
 };
 
 export type IncreaseCartItemInput = {
@@ -126,6 +148,10 @@ export type Query = {
   cart?: Maybe<Cart>;
   featuredPlaylists: Array<Playlist>;
   hello?: Maybe<Scalars['String']['output']>;
+  jsonPlaceholderPost?: Maybe<JsonPlaceholderPost>;
+  jsonPlaceholderPosts: Array<JsonPlaceholderPost>;
+  jsonPlaceholderUser?: Maybe<JsonPlaceholderUser>;
+  jsonPlaceholderUsers: Array<JsonPlaceholderUser>;
   playlist?: Maybe<Playlist>;
   viewer?: Maybe<User>;
   viewers: Array<User>;
@@ -133,6 +159,16 @@ export type Query = {
 
 
 export type QueryCartArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryJsonPlaceholderPostArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryJsonPlaceholderUserArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -173,6 +209,27 @@ export type User = {
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
+};
+
+export type JsonPlaceholderPost = {
+  __typename?: 'jsonPlaceholderPost';
+  body?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['Int']['output']>;
+};
+
+export type JsonPlaceholderUser = {
+  __typename?: 'jsonPlaceholderUser';
+  address?: Maybe<Address>;
+  company?: Maybe<Company>;
+  email?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  posts?: Maybe<Array<Maybe<JsonPlaceholderPost>>>;
+  username?: Maybe<Scalars['String']['output']>;
+  website?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -249,10 +306,13 @@ export type ResolversTypes = {
   AddItemsToPlaylistInput: AddItemsToPlaylistInput;
   AddItemsToPlaylistPayload: ResolverTypeWrapper<AddItemsToPlaylistPayloadModel>;
   AddToCartInput: AddToCartInput;
+  Address: ResolverTypeWrapper<Address>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Cart: ResolverTypeWrapper<Cart>;
   CartItem: ResolverTypeWrapper<CartItem>;
+  Company: ResolverTypeWrapper<Company>;
   DecreaseCartItemInput: DecreaseCartItemInput;
+  Geo: ResolverTypeWrapper<Geo>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   IncreaseCartItemInput: IncreaseCartItemInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
@@ -263,6 +323,8 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Track: ResolverTypeWrapper<TrackModel>;
   User: ResolverTypeWrapper<User>;
+  jsonPlaceholderPost: ResolverTypeWrapper<JsonPlaceholderPost>;
+  jsonPlaceholderUser: ResolverTypeWrapper<JsonPlaceholderUser>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -270,10 +332,13 @@ export type ResolversParentTypes = {
   AddItemsToPlaylistInput: AddItemsToPlaylistInput;
   AddItemsToPlaylistPayload: AddItemsToPlaylistPayloadModel;
   AddToCartInput: AddToCartInput;
+  Address: Address;
   Boolean: Scalars['Boolean']['output'];
   Cart: Cart;
   CartItem: CartItem;
+  Company: Company;
   DecreaseCartItemInput: DecreaseCartItemInput;
+  Geo: Geo;
   ID: Scalars['ID']['output'];
   IncreaseCartItemInput: IncreaseCartItemInput;
   Int: Scalars['Int']['output'];
@@ -284,6 +349,8 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
   Track: TrackModel;
   User: User;
+  jsonPlaceholderPost: JsonPlaceholderPost;
+  jsonPlaceholderUser: JsonPlaceholderUser;
 };
 
 export type AddItemsToPlaylistPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['AddItemsToPlaylistPayload'] = ResolversParentTypes['AddItemsToPlaylistPayload']> = {
@@ -291,6 +358,15 @@ export type AddItemsToPlaylistPayloadResolvers<ContextType = Context, ParentType
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   playlist?: Resolver<Maybe<ResolversTypes['Playlist']>, ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddressResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Address'] = ResolversParentTypes['Address']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  geo?: Resolver<Maybe<ResolversTypes['Geo']>, ParentType, ContextType>;
+  street?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  suite?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  zipcode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -307,6 +383,19 @@ export type CartItemResolvers<ContextType = Context, ParentType extends Resolver
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CompanyResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Company'] = ResolversParentTypes['Company']> = {
+  bs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  catchPhrase?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GeoResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Geo'] = ResolversParentTypes['Geo']> = {
+  lat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -330,6 +419,10 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<QueryCartArgs, 'id'>>;
   featuredPlaylists?: Resolver<Array<ResolversTypes['Playlist']>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  jsonPlaceholderPost?: Resolver<Maybe<ResolversTypes['jsonPlaceholderPost']>, ParentType, ContextType, RequireFields<QueryJsonPlaceholderPostArgs, 'id'>>;
+  jsonPlaceholderPosts?: Resolver<Array<ResolversTypes['jsonPlaceholderPost']>, ParentType, ContextType>;
+  jsonPlaceholderUser?: Resolver<Maybe<ResolversTypes['jsonPlaceholderUser']>, ParentType, ContextType, RequireFields<QueryJsonPlaceholderUserArgs, 'id'>>;
+  jsonPlaceholderUsers?: Resolver<Array<ResolversTypes['jsonPlaceholderUser']>, ParentType, ContextType>;
   playlist?: Resolver<Maybe<ResolversTypes['Playlist']>, ParentType, ContextType, RequireFields<QueryPlaylistArgs, 'id'>>;
   viewer?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryViewerArgs, 'id'>>;
   viewers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
@@ -353,14 +446,40 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type JsonPlaceholderPostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['jsonPlaceholderPost'] = ResolversParentTypes['jsonPlaceholderPost']> = {
+  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JsonPlaceholderUserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['jsonPlaceholderUser'] = ResolversParentTypes['jsonPlaceholderUser']> = {
+  address?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['jsonPlaceholderPost']>>>, ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = Context> = {
   AddItemsToPlaylistPayload?: AddItemsToPlaylistPayloadResolvers<ContextType>;
+  Address?: AddressResolvers<ContextType>;
   Cart?: CartResolvers<ContextType>;
   CartItem?: CartItemResolvers<ContextType>;
+  Company?: CompanyResolvers<ContextType>;
+  Geo?: GeoResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Playlist?: PlaylistResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Track?: TrackResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  jsonPlaceholderPost?: JsonPlaceholderPostResolvers<ContextType>;
+  jsonPlaceholderUser?: JsonPlaceholderUserResolvers<ContextType>;
 };
 

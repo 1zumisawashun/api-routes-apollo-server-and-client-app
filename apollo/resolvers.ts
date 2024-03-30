@@ -5,21 +5,31 @@ export const resolvers: Resolvers = {
     hello() {
       return "Hello World";
     },
-    async viewer(_, { id }, { prisma }) {
-      const viewer = await prisma.user.findFirstOrThrow({
+    viewer(_, { id }, { prisma }) {
+      return prisma.user.findFirstOrThrow({
         where: { id: +id },
       });
-      return viewer;
     },
-    async viewers(_, __, { prisma }) {
-      const viewers = await prisma.user.findMany();
-      return viewers;
+    viewers(_, __, { prisma }) {
+      return prisma.user.findMany();
     },
     featuredPlaylists: (_, __, { dataSources }) => {
       return dataSources.spotifyAPI.getFeaturedPlaylists();
     },
     playlist: (_, { id }, { dataSources }) => {
       return dataSources.spotifyAPI.getPlaylist(id);
+    },
+    jsonPlaceholderUser: (_, { id }, { dataSources }) => {
+      return dataSources.jsonPlaceholderUserAPI.getUser(id);
+    },
+    jsonPlaceholderUsers: (_, __, { dataSources }) => {
+      return dataSources.jsonPlaceholderUserAPI.getUsers();
+    },
+    jsonPlaceholderPost: (_, { id }, { dataSources }) => {
+      return dataSources.jsonPlaceholderPostAPI.getPost(id);
+    },
+    jsonPlaceholderPosts: (_, __, { dataSources }) => {
+      return dataSources.jsonPlaceholderPostAPI.getPosts();
     },
   },
   Mutation: {

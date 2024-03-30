@@ -1,7 +1,5 @@
-import gql from "graphql-tag";
 import Link from "next/link";
-import { useQuery } from "@apollo/client";
-import { initializeApollo } from "../../apollo/client";
+import { useQuery, gql } from "@apollo/client";
 
 const HelloQuery = gql`
   query HelloQuery {
@@ -17,7 +15,7 @@ export default function Pages() {
 
   return (
     <div>
-      <p>{data.hello} world!</p>
+      <p>{data.hello}</p>
       <Link href="/users">users</Link> page.
       <Link href="/users/1">user</Link> page.
       <Link href="/cart">cart</Link> page.
@@ -25,16 +23,3 @@ export default function Pages() {
   );
 }
 
-export async function getStaticProps() {
-  const apolloClient = initializeApollo();
-
-  await apolloClient.query({
-    query: HelloQuery,
-  });
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  };
-}
