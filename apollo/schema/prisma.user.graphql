@@ -1,0 +1,9 @@
+#import Cart from "./prisma.cart.graphql"
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  status: String!
+  cart: Cart
+}

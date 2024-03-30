@@ -6,13 +6,16 @@ const config: CodegenConfig = {
   generates: {
     "./apollo/resolvers-types.ts": {
       config: {
+        // NOTE:./apollo/resolvers-types.tsから見た相対パスで指定する
         mappers: {
-          Cart: "@prisma/client#Cart",
-          CartItem: "@prisma/client#CartItem",
+          User: "@prisma/client/index.d#User",
+          Cart: "@prisma/client/index.d#Cart",
+          CartItem: "@prisma/client/index.d#CartItem",
           Playlist: "./models#PlaylistModel",
           Track: "./models#TrackModel",
           AddItemsToPlaylistPayload: "./models#AddItemsToPlaylistPayloadModel",
         },
+        contextType: "./contexts#Context",
       },
       plugins: ["typescript", "typescript-resolvers"],
     },

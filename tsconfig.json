@@ -16,7 +16,9 @@
     "incremental": true,
     // 追加・変更
     "paths": {
-      "@/*": ["./src/*"]
+      "@/pages/*": ["./src/pages/*"],
+      "@/libs/*": ["./src/libs/*"],
+      "@/apollo/*": ["./apollo/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

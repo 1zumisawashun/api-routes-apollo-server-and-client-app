@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "concurrently \"next\" \"npm run graphql:generate:watch\"",
     "build": "next build",
     "start": "next start",
     "prisma:generate": "prisma generate",

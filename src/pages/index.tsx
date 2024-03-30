@@ -25,16 +25,16 @@ export default function Pages() {
   );
 }
 
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo();
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
 
-//   await apolloClient.query({
-//     query: ViewerQuery,
-//   });
+  await apolloClient.query({
+    query: HelloQuery,
+  });
 
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   };
-// }
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+}

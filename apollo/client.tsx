@@ -1,26 +1,31 @@
 import { useMemo } from "react";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import { SchemaLink } from "@apollo/client/link/schema";
-import { schema } from "../apollo/schema";
+// import { SchemaLink } from "@apollo/client/link/schema";
+// import { schema } from "../apollo/schema";
 import merge from "deepmerge";
 
 let apolloClient;
 
-function createIsomorphLink() {
-  if (typeof window === "undefined") {
-    return new SchemaLink({ schema });
-  } else {
-    return new HttpLink({
-      uri: "/api/graphql",
-      credentials: "same-origin",
-    });
-  }
-}
+/**
+ * fs使ってgraphqlファイル場合はapi routeでないといけないけど
+ * フロントで読み込むならどうすれば良いのか？？
+ */
+
+// function createIsomorphLink() {
+//   if (typeof window === "undefined") {
+//     return new SchemaLink({ schema });
+//   } else {
+//     return new HttpLink({
+//       uri: "/api/graphql",
+//       credentials: "same-origin",
+//     });
+//   }
+// }
 
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(),
+    // link: createIsomorphLink(),
     cache: new InMemoryCache(),
   });
 }

@@ -1,0 +1,18 @@
+type CartItem {
+  id: ID!
+  name: String!
+  description: String
+  price: Int!
+  quantity: Int!
+  image: String
+}
+
+input IncreaseCartItemInput {
+  id: ID!
+  cartId: ID!
+}
+
+input DecreaseCartItemInput {
+  id: ID!
+  cartId: ID!
+}

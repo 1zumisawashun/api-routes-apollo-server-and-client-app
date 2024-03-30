@@ -1,25 +1,26 @@
-import { PrismaClient } from "@prisma/client";
+import { Resolvers } from "@/apollo/resolvers-types";
 
-interface Context {
-  prisma: PrismaClient;
-}
-
-export const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
     hello() {
       return "Hello World";
     },
-    // FIXME:なぜかStringが渡ってくる
-    async viewer(parent: undefined, args: { id: string }, { prisma }: Context) {
-      console.log(args);
+    async viewer(_, { id }, { prisma }) {
       const viewer = await prisma.user.findFirstOrThrow({
-        where: { id: +args.id },
+        where: { id: +id },
       });
       return viewer;
     },
-    async viewers(parent: undefined, args: {}, { prisma }: Context) {
+    async viewers(_, __, { prisma }) {
       const viewers = await prisma.user.findMany();
       return viewers;
     },
+    featuredPlaylists: (_, __, { dataSources }) => {
+      return dataSources.spotifyAPI.getFeaturedPlaylists();
+    },
+    playlist: (_, { id }, { dataSources }) => {
+      return dataSources.spotifyAPI.getPlaylist(id);
+    },
   },
+  Mutation: {},
 };
