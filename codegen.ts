@@ -3,6 +3,7 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
   overwrite: true,
   schema: "./apollo/root.graphql",
+  // documents: "./apollo/queries/*.graphql",
   generates: {
     "./apollo/resolvers-types.ts": {
       config: {
@@ -17,7 +18,7 @@ const config: CodegenConfig = {
         },
         contextType: "./contexts#Context",
       },
-      plugins: ["typescript", "typescript-resolvers"],
+      plugins: ["typescript", "typescript-resolvers", "typescript-operations"],
     },
   },
 };

@@ -58,6 +58,9 @@ export function useApollo(initialState) {
   return store;
 }
 
+/**
+ * @see https://www.apollographql.com/docs/react/get-started
+ */
 export function client() {
   return new ApolloClient({
     uri: "/api/graphql",
